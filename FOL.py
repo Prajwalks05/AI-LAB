@@ -91,3 +91,32 @@ def forward_chaining(rules, facts, query):
 # Run the reasoning
 query = "Criminal(Robert)"
 forward_chaining(rules, facts, query)
+
+
+
+'''
+Initial Facts:
+   Enemy(A,America)
+   American(Robert)
+   Owns(A,t1)
+   Missile(t1)
+
+--- Forward Chaining Reasoning ---
+Inferred: Weapon(t1)  from ['Missile(x)']
+Inferred: Hostile(A)  from ['Enemy(x,America)']
+Inferred: Sells(Robert,t1,A)  from ['Missile(x)', 'Owns(A,x)']
+Inferred: Criminal(Robert)  from ['American(x)', 'Weapon(y)', 'Sells(x,y,z)', 'Hostile(z)']
+
+Final Facts:
+   American(Robert)
+   Criminal(Robert)
+   Enemy(A,America)
+   Hostile(A)
+   Missile(t1)
+   Owns(A,t1)
+   Sells(Robert,t1,A)
+   Weapon(t1)
+
+Query: Criminal(Robert)
+✅ Query is TRUE – proven by forward chaining.
+'''
